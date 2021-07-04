@@ -20,12 +20,13 @@ while True:
     line = f"{i}".encode()
     print(f"Writing {line}")
     ser.write(line)
+    ser.flushOutput()
 
     while not ser.inWaiting():
         sleep(0.01)
     response = ser.readline()
     print(f"Got response {response}")
 
-    i = (i + 1) % 8
+    i = (i + 1) % 9
 
-    sleep(0.5)
+    sleep(0.1)
