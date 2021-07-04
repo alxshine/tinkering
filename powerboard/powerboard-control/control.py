@@ -1,6 +1,6 @@
+import psutil
 import serial
 from time import sleep
-import sys
 
 
 COM = "COM6"  # /dev/ttyACM0 (Linux)
@@ -17,16 +17,18 @@ ser.readall()
 
 i = 0
 while True:
-    line = f"{i}".encode()
-    print(f"Writing {line}")
-    ser.write(line)
-    ser.flushOutput()
+    load = psutil.cpu_percent()
+    print(f"Load is {load}")
+    converted = int(load / 12.5)
+    message = f"{converted}".encode()
+    print(f"Writing {message}")
+    ser.write(message)
 
     while not ser.inWaiting():
         sleep(0.01)
     response = ser.readline()
     print(f"Got response {response}")
 
-    i = (i + 1) % 9
+    i = (i + 1) % 8
 
-    sleep(0.1)
+    sleep(0.5)
