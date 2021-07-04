@@ -46,7 +46,7 @@ void setup()
 void loop()
 {
   while (!Serial.available())
-    ;
+    delay(100);
   auto read = Serial.readString();
   auto value = read.toInt();
 
