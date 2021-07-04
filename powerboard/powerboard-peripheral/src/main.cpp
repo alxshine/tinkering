@@ -7,8 +7,6 @@ const int CLEAR = D2;
 const int DELAY_TIME = 0;
 const int UPDATE_DELAY = 100;
 
-int value = 0;
-
 void clear()
 {
   digitalWrite(CLEAR, LOW);
@@ -50,9 +48,8 @@ void loop()
   while (!Serial.available())
     ;
   auto read = Serial.readString();
-  int value = read.toInt();
+  auto value = read.toInt();
 
   showBarValue(value);
   Serial.println(value);
-  // Serial.printf("Value was %d\r\n", value);
 }
